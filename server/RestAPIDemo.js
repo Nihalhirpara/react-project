@@ -1,8 +1,10 @@
 const express = require('express');
 const mongoose = require('mongoose');
-const bodyParser = require('body-parser')
+const bodyParser = require('body-parser');
+const AdminModel = require('./model/AdminModel');
 const cors = require('cors');
 const Products = require('./model/ProductModel');
+
 mongoose.connect('mongodb+srv://nihalhirpara:nihal@cluster0.c6zgy7x.mongodb.net/factory?retryWrites=true&w=majority').then(() => {
     const app = express();
     app.use(bodyParser.urlencoded({ extended: false }));
@@ -49,8 +51,21 @@ mongoose.connect('mongodb+srv://nihalhirpara:nihal@cluster0.c6zgy7x.mongodb.net/
         const data = await Products.deleteOne({ _id: req.params.id });
         res.send(data);
     });
-
+    
     app.listen(3003, () => {
         console.log("Server started at @ 3003");
     })
+
+
+    app.get('/admins', async (req, res) => {
+        const data = await AdminModel.find();
+        res.send(data);
+    });
+     
+    app.get('/admin/:id', async (req, res) => {
+        const data = await AdminModel.findOne({
+            _id: req.params.id
+        });
+        res.send(data);
+    });
 });
