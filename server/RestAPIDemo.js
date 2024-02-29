@@ -4,8 +4,9 @@ const bodyParser = require('body-parser');
 const AdminModel = require('./model/AdminModel');
 const cors = require('cors');
 const Products = require('./model/ProductModel');
+require("dotenv").config();
 
-mongoose.connect('mongodb+srv://nihalhirpara:nihal@cluster0.c6zgy7x.mongodb.net/factory?retryWrites=true&w=majority').then(() => {
+mongoose.connect(process.env.MONGO_URL).then(() => {
     const app = express();
     app.use(bodyParser.urlencoded({ extended: false }));
     app.use(express.json());

@@ -77,6 +77,7 @@ function ProductAdd() {
 
   return (
     <>
+    <div className="col-md-12">
       <table style={{ marginTop: "100px" }}>
         <tbody>
           <tr>
@@ -212,6 +213,7 @@ function ProductAdd() {
           </tr>
         </tfoot>
       </table>
+      </div>
     </>
   );
 }
